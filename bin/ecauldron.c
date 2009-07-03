@@ -22,44 +22,19 @@ static void ecaul_main_win(void)
    // Evas_Object *win, *bg, *bx0, *lb, *fr, *en;
    // Evas_Object *win, *bg, *bx0, *lb, *li, *fr;
   
-   /* 1 create an elm window - it returns an evas object. this is a little
-    * special as the object lives in the canvas that is inside the window
-    * so what is returned is really inside the window, but as you manipulate
-    * the evas object returned - the window will respond. elm_win makes sure
-    * of that so you can blindly treat it like any other evas object
-    * pretty much, just as long as you know it has special significance */
-   /* the first parameter is a "parent" window - eg for a dialog you want to
-    * have a main window it is related to, here it is NULL meaning there
-    * is no parent. "main" is the name of the window - used by the window
-    * manager for identifying the window uniquely amongst all the windows
-    * within this application (and all instances of the application). the
-    * type is a basic window (the final parameter) */
+   /* Create the main window */
    win = elm_win_add(NULL, "main", ELM_WIN_BASIC);
    /* set the title of the window - this is in the titlebar */
    elm_win_title_set(win, "Elementary Source Mage GNU/Linux Installer");
    
-   /* set a callback on the window when "delete-request" is emitted as
-    * a callback. when this happens my_win_del() is called and the 
-    * data pointer (first param) is passed the final param here (in this
-    * case it is NULL). This is how you can pass specific things to a
-    * callback like objects or data layered on top */
+   /* set a callback on the window when "delete-request" */
    evas_object_smart_callback_add(win, "delete-request", ecaul_win_del, NULL);
    
-   /* add a background to our window. this just uses the standard theme set
-    * background. without a backgorund, you could make a window seem
-    * transparent with elm_win_alpha_set(win, 1); for example. if you have
-    * a compositor running this will make the window able to be
-    * semi-transparent and any space not filled by object/widget pixels will
-    * be transparent or translucent based on alpha. if you do not have a
-    * comnpositor running this should fall back to using shaped windows
-    * (which have a mask). both these features will be slow and rely on
-    * a lot more resources, so only use it if you need it. */
+   /* add a background to our window. */
    bg = elm_bg_add(win);
    /* set weight to 1.0 x 1.0 == expand in both x and y direction */
    evas_object_size_hint_weight_set(bg, 1.0, 1.0);
-   /* tell the window that this object is to be resized along with the window.
-    * also as a result this object will be one of several objects that
-    * controls the minimum/maximum size of the window */
+   /* tell the window that this object is to be resized along with the window. */
    elm_win_resize_object_add(win, bg);
    /* and show the background */
    evas_object_show(bg);
