@@ -18,49 +18,58 @@ static void ecaul_win_del(void *data, Evas_Object *obj, void *event_info)
 
 static void ecaul_main_win(void)
 {
-   Evas_Object *win, *bg, *bx0, *lb, *fr;
-   // Evas_Object *win, *bg, *bx0, *lb, *fr, *en;
-   // Evas_Object *win, *bg, *bx0, *lb, *li, *fr;
-  
-   /* Create the main window */
-   win = elm_win_add(NULL, "main", ELM_WIN_BASIC);
-   /* set the title of the window - this is in the titlebar */
+   Evas_Object *win, *bg;
+   Evas_Object *bx0, *lb, *fr;
+   char buf[PATH_MAX];
+
+   // Create the main window 
+   win = elm_win_add(NULL, "Ecauldron Main Window", ELM_WIN_BASIC);
+   // set the title of the window - this is in the titlebar 
    elm_win_title_set(win, "Elementary Source Mage GNU/Linux Installer");
-   
-   /* set a callback on the window when "delete-request" */
+   // set a callback on the window when "delete-request" 
    evas_object_smart_callback_add(win, "delete-request", ecaul_win_del, NULL);
-   
-   /* add a background to our window. */
+
+   // add a background to our window. 
    bg = elm_bg_add(win);
-   /* set weight to 1.0 x 1.0 == expand in both x and y direction */
+   snprintf(buf, sizeof(buf), "images/bg_main.png");
+   elm_bg_file_set(bg, buf, NULL);
+   // set weight to 1.0 x 1.0 == expand in both x and y direction 
    evas_object_size_hint_weight_set(bg, 1.0, 1.0);
-   /* tell the window that this object is to be resized along with the window. */
+   // tell the window that this object is to be resized along with the window. 
    elm_win_resize_object_add(win, bg);
-   /* and show the background */
+   // and show the background 
    evas_object_show(bg);
-   
-   /* add a box layout widget to the window */
+
+   // add a box layout widget to the window 
    bx0 = elm_box_add(win);
-   /* allow base box (bx0) to expand in x and y */
+   // allow base box (bx0) to expand in x and y 
    evas_object_size_hint_weight_set(bx0, 1.0, 1.0);
-   /* tell the window that the box affects window size and also will be 
-    * resized when the window is */
+   // tell the window that the box affects window size and also will be 
+   // resized when the window is 
    elm_win_resize_object_add(win, bx0);
    evas_object_show(bx0);
-   
+
+   // Add a frame widget to the box0
    fr = elm_frame_add(win);
-   elm_frame_label_set(fr, "Information");
+   // set frame title
+   //elm_frame_label_set(fr, "Information");
    elm_box_pack_end(bx0, fr);
    evas_object_show(fr);
    
    lb = elm_label_add(win);
    elm_label_label_set(lb, 
-                       "Welcome on SourceMage GNU/Linux.<br>"
+                       "Welcome on <b>SourceMage GNU/Linux</>.<br>"
                        "Thank you for choosing our distribution.<br>"
-                       "You will see magic is at your fingertips.<br>");
+                       "You will see <em>magic</> is at your fingertips.<br>");
    elm_frame_content_set(fr, lb);
    evas_object_show(lb);
 
+
+   evas_object_size_hint_min_set(bg, 160, 160);
+   evas_object_size_hint_max_set(bg, 640, 640);
+   evas_object_resize(win, 800, 600);
+   evas_object_show(win);
+}
 
 /*   
    li = elm_list_add(win);
@@ -111,12 +120,13 @@ static void ecaul_main_win(void)
    
    elm_list_go(li);
 */   
-   /* set an initial window size */
+/*
+   // set an initial window size 
    evas_object_resize(win, 800, 600);
-   /* show the window */
-   evas_object_show(win);
+   // show the window 
+    evas_object_show(win);
 }
-
+*/
 /* this is your elementary main function - it MUSt be called IMMEDIATELY
  * after elm_init() and MUSt be passed argc and argv, and MUST be called
  * elm_main and not be static - must be a visible symbol with EAPI infront */
