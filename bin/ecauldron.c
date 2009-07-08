@@ -1,5 +1,14 @@
 #include <Elementary.h>
 #ifndef ELM_LIB_QUICKLAUNCH
+/*
+ * @NAME
+ * @AUTHOR
+ * @LICENCE
+ * @DATE
+ * @CHANGELOG
+ *
+ *
+ */
 
 static void ecaul_win_del(void *data, Evas_Object *obj, void *evet_info);
 static void ecaul_main_win(void);
