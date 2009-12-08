@@ -9,5 +9,6 @@ main: bin/ecauldron
 
 clean:
 	rm -f bin/ecauldron 
+	rm -f *~ 
 
 re: clean main
